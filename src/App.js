@@ -5,7 +5,7 @@ import apiKey from "./config";
 import PhotoContainer from "./components/PhotoContainer";
 import SearchForm from "./components/SearchForm";
 // import MainNav from './components/MainNav';
-const navKeys = ["BATTERFLAY", "Lion", "monkey"];
+const navKeys = ["BATTERFLAY", "Lion", "monkey", "computer"];
 
 function App() {
   //set state for photos
@@ -31,16 +31,8 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+      
   };
-
-  let navKeysHtml = "";
-  for (let i = 0; i < navKeys.length; i++)
-    navKeysHtml += `<Route path='/${navKeys[i]}' element={<PhotoContainer data={photos} searchText={'${navKeys[i]}'} /> } />`;
-  // navKeys.map((keyVal) => {
-  //   `<Route path='/${keyVal}' element={<PhotoContainer data={test} searchText={'${keyVal}'} /> } />`
-  // })
-
-  console.log(navKeysHtml);
 
   return (
     <BrowserRouter>
@@ -61,21 +53,14 @@ function App() {
         </nav>
 
         <Routes>
-          <Route exact path="/" element={<Navigate to="/BATTERFLAY" />} />
-
-          {/* <Route
-            path="/BATTERFLAY"
-            element={<PhotoContainer data={photos} searchText={"BATTERFLAY"} />}
-          />
-          <Route
-            path="/Lion"
-            element={<PhotoContainer data={photos} searchText={"Lion"} />}
-          />
-          <Route
-            path="/monkey"
-            element={<PhotoContainer data={photos} searchText={"monkey"} />}
-          /> */}
-          {navKeysHtml}
+          <Route exact path="/" element={<Navigate to="`/${navKeys[0]}`" />} />
+              
+          {navKeys.map((key) => (
+            <Route
+              path={`/${key}`}
+              element={<PhotoContainer data={photos} searchText={key} />}
+            />
+          ))}
 
           <Route
             path="/search/:searchText"
