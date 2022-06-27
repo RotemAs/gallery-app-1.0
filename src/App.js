@@ -53,7 +53,7 @@ function App() {
         </nav>
 
         <Routes>
-          <Route exact path="/" element={<Navigate to="`/${navKeys[0]}`" />} />
+          <Route exact path="/" element={<Navigate to="/BATTERFLAY" />} />
               
           {navKeys.map((key) => (
             <Route
