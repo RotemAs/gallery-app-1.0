@@ -63,7 +63,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Navigate to="/BATTERFLAY" />} />
 
-          <Route
+          {/* <Route
             path="/BATTERFLAY"
             element={<PhotoContainer data={photos} searchText={"BATTERFLAY"} />}
           />
@@ -74,7 +74,8 @@ function App() {
           <Route
             path="/monkey"
             element={<PhotoContainer data={photos} searchText={"monkey"} />}
-          />
+          /> */}
+          {navKeysHtml}
 
           <Route
             path="/search/:searchText"
