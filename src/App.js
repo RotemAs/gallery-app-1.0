@@ -7,6 +7,7 @@ import SearchForm from "./components/SearchForm";
 // import MainNav from './components/MainNav';
 const navKeys = ["BATTERFLAY", "Lion", "monkey", "computer"];
 
+
 function App() {
   //set state for photos
   const [photos, setPhotos] = useState([]);
@@ -33,6 +34,13 @@ function App() {
       });
       
   };
+  const  handleSubmit = e => {
+    e.preventDefault();
+    console.log('app---this is:', this.search.value);
+}
+  // console.log('serchText:',  );
+
+
 
   return (
     <BrowserRouter>
