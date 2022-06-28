@@ -4,7 +4,6 @@ import axios from "axios";
 import apiKey from "./config";
 import PhotoContainer from "./components/PhotoContainer";
 import SearchForm from "./components/SearchForm";
-// import MainNav from './components/MainNav';
 const navKeys = ["BATTERFLAY", "Lion", "monkey", "computer"];
 
 
@@ -34,18 +33,11 @@ function App() {
       });
       
   };
-  const  handleSubmit = e => {
-    e.preventDefault();
-    console.log('app---this is:', this.search.value);
-}
-  // console.log('serchText:',  );
-
-
 
   return (
     <BrowserRouter>
       <div>
-        <SearchForm />
+        <SearchForm  />
         <nav className="main-nav">
           <ul>
             {navKeys.map((key) => {
