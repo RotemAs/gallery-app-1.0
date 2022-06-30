@@ -25,6 +25,7 @@ function App() {
       )
       .then((res) => {
         console.log(res.data.photos.photo);
+        console.log('fetch photos - query is:', query);
         setPhotos(res.data.photos.photo);
         setSearchText(query);
       })
@@ -37,7 +38,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        <SearchForm  />
+        <SearchForm searchFunc={fetchPhotos}  />
         <nav className="main-nav">
           <ul>
             {navKeys.map((key) => {
@@ -71,5 +72,6 @@ function App() {
     </BrowserRouter>
   );
 }
+
 
 export default App;

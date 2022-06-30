@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-// import App from '../App';
+
 
 class SearchForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log('serc forn - this is:', this.search.value);
-    // fetchPhotos(this.search.value)
- const searchText = this.search.value;
+    this.props.searchFunc(this.search.value);
+
 }
   render() {
     return (
