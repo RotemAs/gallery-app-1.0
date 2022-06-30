@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes, Navigate, Link} from "react-router-dom";
+import { BrowserRouter, Route, Routes,Navigate ,Link} from "react-router-dom";
 import axios from "axios";
 import apiKey from "./config";
 import PhotoContainer from "./components/PhotoContainer";
@@ -11,7 +11,6 @@ function App() {
   //set state for photos
   const [photos, setPhotos] = useState([]);
   const [searchText, setSearchText] = useState('');
-  const [searchUser, setSearchUser] = useState('');
 
 
   // useEffect fetches computer photos on page load
@@ -27,18 +26,11 @@ function App() {
       )
       .then((res) => {
         setPhotos(res.data.photos.photo); 
-        // console.log(res.data.photos.photo);
         if(source === 'userSearch'){
-          setSearchText('gel');
-          setSearchUser(query);
-          console.log('query  :',query, 'source :',source);
-          console.log('searchUser',searchUser);
-          
+          setSearchText(query);
         }else if(source === 'navBar'){
           setSearchText(query);
-          console.log('setSearchText:  SearchText',searchText)
         }     
-        console.log( 'searchText  :',searchText);
       })
       .catch((err) => {
         console.log(err);

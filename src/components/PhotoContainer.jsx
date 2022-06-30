@@ -2,9 +2,7 @@
 const PhotoContainer = (props) => {
   const photoData = props.data;
   const query = props.searchText;
-  console.log(query,'props',props);
 
-  
   const photos = photoData.map((photo, index) => {
     return (
       <li key={index}>
