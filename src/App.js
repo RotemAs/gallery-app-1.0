@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes, Navigate, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate, Link} from "react-router-dom";
 import axios from "axios";
 import apiKey from "./config";
 import PhotoContainer from "./components/PhotoContainer";
@@ -10,7 +10,9 @@ const navKeys = ["BATTERFLAY", "Lion", "monkey", "computer"];
 function App() {
   //set state for photos
   const [photos, setPhotos] = useState([]);
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
+  const [searchUser, setSearchUser] = useState('');
+
 
   // useEffect fetches computer photos on page load
   useEffect(() => {
@@ -18,16 +20,25 @@ function App() {
   }, []);
 
   // use axios to make call for 24 pictures
-  const fetchPhotos = (query) => {
+  const fetchPhotos = (query,source) => {
     axios
       .get(
         `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`
       )
       .then((res) => {
-        console.log(res.data.photos.photo);
-        console.log('fetch photos - query is:', query);
-        setPhotos(res.data.photos.photo);
-        setSearchText(query);
+        setPhotos(res.data.photos.photo); 
+        // console.log(res.data.photos.photo);
+        if(source === 'userSearch'){
+          setSearchText('gel');
+          setSearchUser(query);
+          console.log('query  :',query, 'source :',source);
+          console.log('searchUser',searchUser);
+          
+        }else if(source === 'navBar'){
+          setSearchText(query);
+          console.log('setSearchText:  SearchText',searchText)
+        }     
+        console.log( 'searchText  :',searchText);
       })
       .catch((err) => {
         console.log(err);
@@ -44,7 +55,7 @@ function App() {
             {navKeys.map((key) => {
               return (
                 <li key={key}>
-                  <Link to={`/${key}`} onClick={() => fetchPhotos(`${key}`)}>
+                  <Link to={`/${key}`} onClick={() => fetchPhotos(`${key}`,'navBar')}>
                     {key}
                   </Link>
                 </li>
@@ -64,7 +75,7 @@ function App() {
           ))}
 
           <Route
-            path="/search/:searchText"
+            path={`/search/:${searchText}`}
             element={<PhotoContainer data={photos} searchText={searchText} />}
           />
         </Routes>
