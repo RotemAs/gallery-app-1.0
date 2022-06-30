@@ -67,7 +67,7 @@ function App() {
           ))}
 
           <Route
-            path={`/search/:${searchText}`}
+            path={`/search/:searchText`}
             element={<PhotoContainer data={photos} searchText={searchText} />}
           />
         </Routes>
