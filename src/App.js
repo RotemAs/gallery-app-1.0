@@ -18,18 +18,17 @@ function App() {
   const [photos, setPhotos] = useState([]);
   const [searchText, setSearchText] = useState("");
   // let location = useLocation();
-let location = window.location.pathname.split("/")[1]
-let locationSearch = window.location.pathname.split("/")[2]
+  let location = window.location.pathname.split("/")[1];
+  let locationSearch = window.location.pathname.split("/")[2];
 
   // useEffect fetches computer photos on page load
   useEffect(() => {
     if (location === "") {
-      fetchPhotos(navKeys[0],'startPoint');
+      fetchPhotos(navKeys[0], "startPoint");
+    } else if (location === "userSearch") {
+      fetchPhotos(locationSearch, "manualUserSearch");
     }
-    else if(location==='userSearch'){
-      fetchPhotos(locationSearch,'manualUserSearch');
-    }
-  }, [location,locationSearch]);
+  }, [location, locationSearch]);
 
   // use axios to make call for 24 pictures
   const fetchPhotos = (query, source) => {
@@ -39,9 +38,9 @@ let locationSearch = window.location.pathname.split("/")[2]
       )
       .then((res) => {
         setPhotos(res.data.photos.photo);
-        if (source === "userSearch"||source==='manualUserSearch') {
+        if (source === "userSearch" || source === "manualUserSearch") {
           setSearchText(query);
-        } else if (source === "navBar"||source==='startPoint') {
+        } else if (source === "navBar" || source === "startPoint") {
           setSearchText(query);
         }
       })
@@ -56,14 +55,14 @@ let locationSearch = window.location.pathname.split("/")[2]
         <SearchForm searchFunc={fetchPhotos} />
         <nav className="main-nav">
           <ul>
-            {navKeys.map((key) => {
+            {navKeys.map((navKey, i) => {
               return (
-                <li key={key}>
+                <li key={i.toString()}>
                   <Link
-                    to={`/${key}`}
-                    onClick={() => fetchPhotos(`${key}`, "navBar")}
+                    to={`/${navKey}`}
+                    onClick={() => fetchPhotos(`${navKey}`, "navBar")}
                   >
-                    {key}
+                    {navKey}
                   </Link>
                 </li>
               );
@@ -88,7 +87,6 @@ let locationSearch = window.location.pathname.split("/")[2]
           <Route
             path={`/userSearch/:searchText`}
             element={<PhotoContainer data={photos} searchText={searchText} />}
-
           />
         </Routes>
       </div>
