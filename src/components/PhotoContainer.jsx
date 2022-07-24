@@ -5,8 +5,8 @@ const PhotoContainer = (props) => {
 
   const photos = photoData.map((photo, index) => {
     return (
-      <li key={index}>
-        <img src={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_w.jpg`} alt={query} />
+      <li >
+        <img  src={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_w.jpg`} key={photo.id} alt={query}  />
       </li>
     );
   });
