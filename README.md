@@ -1,8 +1,11 @@
 Route  explanation :
 
 Search using a built-in text button : /searchText
+
 Search using the UI search box : /search/:searchText
+
 Search using the web address bar : userSearch/:searchText
+
 
 
 # Getting Started with Create React App
