@@ -14,6 +14,7 @@ import PhotoContainer from "./components/PhotoContainer";
 import SearchForm from "./components/SearchForm";
 import NotFound from "./components/NotFound";
 import ImgLoad from "./components/imgLoading";
+import ErrorPage from "./components/ErrorPage";
 const navKeys = ["BATTERFLAY", "Lion", "monkey", "computer"];
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
         <nav className="main-nav">
           <ul>
             {navKeys.map((navKey, i) => {
+              console.log('navKey1 i:',i);
               return (
                 <li key={i.toString()}>
                   <Link
@@ -82,6 +84,7 @@ function App() {
           {navKeys.map((key) => (
             <Route
               path={`/${key}`}
+              key={key}
               element={
                 <PhotoContainer
                   data={photos}
@@ -114,6 +117,7 @@ function App() {
           />
           <Route component={NotFound} />
           <Route component={ImgLoad} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
     </BrowserRouter>
